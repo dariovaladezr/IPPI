@@ -693,20 +693,18 @@
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script>
-// Alternativa más confiable
-fetch('https://api.goatcounter.com/count?p=/webpage-ippi')
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('count').textContent = data.count || 'Cargando...';
-  })
-  .catch(error => {
-    // Si falla, usar contador local como respaldo
-    let localCount = localStorage.getItem('localVisitorCount') || 0;
-    localCount = parseInt(localCount) + 1;
-    localStorage.setItem('localVisitorCount', localCount);
-    document.getElementById('count').textContent = localCount;
-    console.log('Usando contador local:', localCount);
-  });
+// Contador simple y confiable
+fetch('https://api.counterapi.dev/v1/webpage-ippi/views/up', {
+  method: 'POST'
+})
+.then(response => response.json())
+.then(data => {
+  document.getElementById('count').textContent = data.count;
+})
+.catch(error => {
+  console.log('Error:', error);
+  document.getElementById('count').textContent = 'No disponible';
+});
 </script>
 </body>
 </body>

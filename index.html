@@ -23,6 +23,11 @@
                     <a href="#nosotros" class="nav-link">Nosotros</a>
                     <a href="#contacto" class="nav-link">Contacto</a>
                 </div>
+                <div id="visitor-counter" style="text-align: center; margin: 20px 0; padding: 10px; background-color: #f0f0f0; border-radius: 90px;">
+    <p style="margin: 0; font-size: 16px;">
+        👥: <span id="count" style="font-weight: bold; color: #333;">Cargando...</span>
+    </p>
+</div>
                 <div class="nav-toggle" id="nav-toggle">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -687,6 +692,17 @@
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script>
+fetch('https://api.countapi.xyz/hit/webpage-ippi/visits')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('count').textContent = data.value;
+  })
+  .catch(error => {
+    console.log('Error al cargar contador:', error);
+    document.getElementById('count').textContent = 'No disponible';
+  });
+</script>
 </body>
 </body>
 </html>

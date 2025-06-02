@@ -693,18 +693,24 @@
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script>
-// Contador simple y confiable
-fetch('https://api.counterapi.dev/v1/webpage-ippi/views/up', {
-  method: 'POST'
-})
-.then(response => response.json())
-.then(data => {
-  document.getElementById('count').textContent = data.count;
-})
-.catch(error => {
-  console.log('Error:', error);
-  document.getElementById('count').textContent = 'No disponible';
-});
+// Contador simple que siempre funciona
+function simpleCounter() {
+  const countElement = document.getElementById('count');
+  
+  // Obtener o crear contador
+  let visits = parseInt(localStorage.getItem('total-visits') || '0');
+  
+  // Solo contar si es nueva sesión
+  if (!sessionStorage.getItem('counted')) {
+    visits++;
+    localStorage.setItem('total-visits', visits.toString());
+    sessionStorage.setItem('counted', 'true');
+  }
+  
+  countElement.textContent = visits;
+}
+
+simpleCounter();
 </script>
 </body>
 </body>
